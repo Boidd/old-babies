@@ -20,5 +20,6 @@ The models of baby rabbits are unchanged as their default model was updated
 
 Compatible with resource packs that change mob textures
 
-Release available on modrinth: https://modrinth.com/project/old-babies
+Releases available on modrinth: https://modrinth.com/project/old-babies
+
 
