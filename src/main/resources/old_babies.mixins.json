@@ -1,0 +1,27 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.boid.oldBabies.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "LayerDefinitionsMixin",
+    "LivingEntityRendererMixin",
+    "ModelLayersMixin",
+    "model.ChickenRendererMixin",
+    "model.PigRendererMixin",
+    "model.cat.CatCollarLayerMixin",
+    "model.cat.CatRendererMixin",
+    "model.equine.AbstractEquineModelMixin",
+    "model.equine.HorseMarkingLayerMixin",
+    "model.sheep.SheepWoolLayerMixin",
+    "model.sheep.SheepWoolUndercoatLayerMixin",
+    "model.wolf.WolfCollarLayerMixin",
+    "model.wolf.WolfRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

@@ -1,0 +1,6 @@
+accessWidener v2 official
+
+accessible field net/minecraft/client/model/animal/equine/DonkeyModel DONKEY_TRANSFORMER Lnet/minecraft/client/model/geom/builders/MeshTransformer;
+accessible method net/minecraft/client/renderer/entity/layers/RenderLayer coloredCutoutModelCopyLayerRender (Lnet/minecraft/client/model/Model;Lnet/minecraft/resources/Identifier;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;II)V
+accessible field net/minecraft/client/renderer/entity/AgeableMobRenderer babyModel Lnet/minecraft/client/model/EntityModel;
+mutable field net/minecraft/client/renderer/entity/AgeableMobRenderer babyModel Lnet/minecraft/client/model/EntityModel;

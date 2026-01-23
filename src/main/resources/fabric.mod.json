@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "old_babies",
+  "version": "${version}",
+  "name": "Old Babies",
+  "description": "Restores the original large headed look of baby mobs",
+  "authors": ["Boid"],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "icon.png",
+  "environment": "client",
+  "accessWidener": "old_babies.accessWidener",
+  "entrypoints": {
+    "client": [
+      "io.github.boid.oldBabies.OldBabies"
+    ]
+  },
+  "mixins": [
+    "old_babies.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "26.1-alpha.4"
+  }
+}
