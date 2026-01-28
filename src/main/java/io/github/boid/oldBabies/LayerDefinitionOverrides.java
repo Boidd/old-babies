@@ -1,11 +1,13 @@
 package io.github.boid.oldBabies;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.client.model.animal.axolotl.AdultAxolotlModel;
 import net.minecraft.client.model.animal.chicken.AdultChickenModel;
 import net.minecraft.client.model.animal.chicken.ColdChickenModel;
 import net.minecraft.client.model.animal.cow.ColdCowModel;
 import net.minecraft.client.model.animal.cow.CowModel;
 import net.minecraft.client.model.animal.cow.WarmCowModel;
+import net.minecraft.client.model.animal.dolphin.DolphinModel;
 import net.minecraft.client.model.animal.equine.DonkeyModel;
 import net.minecraft.client.model.animal.feline.AdultCatModel;
 import net.minecraft.client.model.animal.feline.AdultFelineModel;
@@ -13,6 +15,8 @@ import net.minecraft.client.model.animal.pig.ColdPigModel;
 import net.minecraft.client.model.animal.pig.PigModel;
 import net.minecraft.client.model.animal.sheep.SheepFurModel;
 import net.minecraft.client.model.animal.sheep.SheepModel;
+import net.minecraft.client.model.animal.squid.SquidModel;
+import net.minecraft.client.model.animal.turtle.AdultTurtleModel;
 import net.minecraft.client.model.animal.wolf.AdultWolfModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -42,6 +46,7 @@ public class LayerDefinitionOverrides {
     }
 
     private static final LayerDefinition donkeyLayerDefinition = LayerDefinition.create(OldBabies.createFullScaleEquineBabyMesh(CubeDeformation.NONE), 64, 64).apply(DonkeyModel.DONKEY_TRANSFORMER);
+    private static final LayerDefinition squidLayerDefinition = SquidModel.createBodyLayer();
 
     private static final List<Entry> overrides = new ArrayList<>(){{
         add(new Entry(ModelLayers.SHEEP_BABY, SheepModel.createBodyLayer(), Constants.SHEEP_BABY_TRANSFORMER));
@@ -58,6 +63,11 @@ public class LayerDefinitionOverrides {
         add(new Entry(ModelLayers.OCELOT_BABY, LayerDefinition.create(AdultFelineModel.createBodyMesh(CubeDeformation.NONE), 64, 32), Constants.FELINE_BABY_TRANSFORMER));
         add(new Entry(ModelLayers.DONKEY_BABY, donkeyLayerDefinition.apply(MeshTransformer.scaling(0.87F)), Constants.EQUINE_BABY_TRANSFORMER));
         add(new Entry(ModelLayers.MULE_BABY, donkeyLayerDefinition.apply(MeshTransformer.scaling(0.92F)), Constants.EQUINE_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.SQUID_BABY, squidLayerDefinition, Constants.GENERIC_AQUATIC_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.GLOW_SQUID_BABY, squidLayerDefinition, Constants.GENERIC_AQUATIC_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.DOLPHIN_BABY, DolphinModel.createBodyLayer(), Constants.GENERIC_AQUATIC_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.AXOLOTL_BABY, AdultAxolotlModel.createBodyLayer(), Constants.GENERIC_AQUATIC_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.TURTLE_BABY, AdultTurtleModel.createBodyLayer(), Constants.TURTLE_BABY_TRANSFORMER));
     }};
 
     private static final List<Entry> additionalEntries = new ArrayList<>(){{

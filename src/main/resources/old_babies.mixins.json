@@ -7,6 +7,7 @@
     "LayerDefinitionsMixin",
     "LivingEntityRendererMixin",
     "ModelLayersMixin",
+    "model.AxolotlRendererMixin",
     "model.ChickenRendererMixin",
     "model.PigRendererMixin",
     "model.cat.CatCollarLayerMixin",
@@ -23,5 +24,8 @@
   },
   "overwrites": {
     "requireAnnotations": true
-  }
+  },
+  "mixins": [
+    "entity.AxolotlMixin"
+  ]
 }
