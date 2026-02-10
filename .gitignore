@@ -1,1 +1,8 @@
 .DS_STORE
+.gradle
+.idea
+build
+gradle
+run
+
+

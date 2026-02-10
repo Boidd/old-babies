@@ -4,20 +4,20 @@
   "package": "io.github.boid.oldBabies.mixin",
   "compatibilityLevel": "JAVA_25",
   "client": [
+    "AgeableMobRendererMixin",
     "LayerDefinitionsMixin",
     "LivingEntityRendererMixin",
     "ModelLayersMixin",
-    "model.AxolotlRendererMixin",
     "model.ChickenRendererMixin",
+    "model.GoatRendererMixin",
     "model.PigRendererMixin",
     "model.cat.CatCollarLayerMixin",
-    "model.cat.CatRendererMixin",
     "model.equine.AbstractEquineModelMixin",
     "model.equine.HorseMarkingLayerMixin",
+    "model.llama.LlamaDecorLayerMixin",
     "model.sheep.SheepWoolLayerMixin",
     "model.sheep.SheepWoolUndercoatLayerMixin",
-    "model.wolf.WolfCollarLayerMixin",
-    "model.wolf.WolfRendererMixin"
+    "model.wolf.WolfCollarLayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

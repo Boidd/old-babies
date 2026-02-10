@@ -1,7 +1,10 @@
 package io.github.boid.oldBabies;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.client.model.animal.armadillo.AdultArmadilloModel;
 import net.minecraft.client.model.animal.axolotl.AdultAxolotlModel;
+import net.minecraft.client.model.animal.bee.AdultBeeModel;
+import net.minecraft.client.model.animal.camel.AdultCamelModel;
 import net.minecraft.client.model.animal.chicken.AdultChickenModel;
 import net.minecraft.client.model.animal.chicken.ColdChickenModel;
 import net.minecraft.client.model.animal.cow.ColdCowModel;
@@ -11,8 +14,12 @@ import net.minecraft.client.model.animal.dolphin.DolphinModel;
 import net.minecraft.client.model.animal.equine.DonkeyModel;
 import net.minecraft.client.model.animal.feline.AdultCatModel;
 import net.minecraft.client.model.animal.feline.AdultFelineModel;
+import net.minecraft.client.model.animal.fox.AdultFoxModel;
+import net.minecraft.client.model.animal.goat.GoatModel;
+import net.minecraft.client.model.animal.llama.LlamaModel;
 import net.minecraft.client.model.animal.pig.ColdPigModel;
 import net.minecraft.client.model.animal.pig.PigModel;
+import net.minecraft.client.model.animal.polarbear.PolarBearModel;
 import net.minecraft.client.model.animal.sheep.SheepFurModel;
 import net.minecraft.client.model.animal.sheep.SheepModel;
 import net.minecraft.client.model.animal.squid.SquidModel;
@@ -63,11 +70,20 @@ public class LayerDefinitionOverrides {
         add(new Entry(ModelLayers.OCELOT_BABY, LayerDefinition.create(AdultFelineModel.createBodyMesh(CubeDeformation.NONE), 64, 32), Constants.FELINE_BABY_TRANSFORMER));
         add(new Entry(ModelLayers.DONKEY_BABY, donkeyLayerDefinition.apply(MeshTransformer.scaling(0.87F)), Constants.EQUINE_BABY_TRANSFORMER));
         add(new Entry(ModelLayers.MULE_BABY, donkeyLayerDefinition.apply(MeshTransformer.scaling(0.92F)), Constants.EQUINE_BABY_TRANSFORMER));
-        add(new Entry(ModelLayers.SQUID_BABY, squidLayerDefinition, Constants.GENERIC_AQUATIC_BABY_TRANSFORMER));
-        add(new Entry(ModelLayers.GLOW_SQUID_BABY, squidLayerDefinition, Constants.GENERIC_AQUATIC_BABY_TRANSFORMER));
-        add(new Entry(ModelLayers.DOLPHIN_BABY, DolphinModel.createBodyLayer(), Constants.GENERIC_AQUATIC_BABY_TRANSFORMER));
-        add(new Entry(ModelLayers.AXOLOTL_BABY, AdultAxolotlModel.createBodyLayer(), Constants.GENERIC_AQUATIC_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.SQUID_BABY, squidLayerDefinition, Constants.GENERIC_SHRINK_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.GLOW_SQUID_BABY, squidLayerDefinition, Constants.GENERIC_SHRINK_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.DOLPHIN_BABY, DolphinModel.createBodyLayer(), Constants.GENERIC_SHRINK_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.AXOLOTL_BABY, AdultAxolotlModel.createBodyLayer(), Constants.GENERIC_SHRINK_BABY_TRANSFORMER));
         add(new Entry(ModelLayers.TURTLE_BABY, AdultTurtleModel.createBodyLayer(), Constants.TURTLE_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.BEE_BABY, AdultBeeModel.createBodyLayer(), Constants.GENERIC_SHRINK_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.FOX_BABY, AdultFoxModel.createBodyLayer(), Constants.FOX_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.GOAT_BABY, GoatModel.createBodyLayer(), Constants.GOAT_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.ARMADILLO_BABY, AdultArmadilloModel.createBodyLayer(), Constants.ARMADILLO_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.CAMEL_BABY, AdultCamelModel.createBodyLayer(), Constants.CAMEL_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.POLAR_BEAR_BABY, PolarBearModel.createBodyLayer(), Constants.POLAR_BEAR_BABY_TRANSFORMER));
+        add(new Entry(ModelLayers.LLAMA_BABY, LlamaModel.createBodyLayer(CubeDeformation.NONE), OldBabies::createLlamaBabyTransformer));
+        add(new Entry(ModelLayers.TRADER_LLAMA_BABY, LlamaModel.createBodyLayer(CubeDeformation.NONE), OldBabies::createLlamaBabyTransformer));
+        add(new Entry(ModelLayers.LLAMA_BABY_DECOR, LlamaModel.createBodyLayer(new CubeDeformation(0.5f)), OldBabies::createLlamaBabyTransformer));
     }};
 
     private static final List<Entry> additionalEntries = new ArrayList<>(){{
