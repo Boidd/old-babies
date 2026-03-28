@@ -1,13 +1,20 @@
 package io.github.boid.oldBabies;
 
+import io.github.boid.oldBabies.config.Config;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.EntityType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.UnaryOperator;
 
 import static net.minecraft.client.model.animal.equine.AbstractEquineModel.createBodyMesh;
@@ -16,17 +23,89 @@ public class OldBabies implements ClientModInitializer {
 
     public static final String MOD_ID = "old_babies";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    protected static final String CONFIG_PATH = MOD_ID+".json";
+    private static Path RESOLVED_CONFIG_PATH;
+    private static Config config;
+
+    private static final Map<EntityType<?>, EntityType<?>> typeMatchers = new HashMap<>(){{
+        put(EntityType.TRADER_LLAMA, EntityType.LLAMA);
+        put(EntityType.MULE, EntityType.DONKEY);
+        put(EntityType.ZOMBIE_VILLAGER, EntityType.VILLAGER);
+        put(EntityType.HUSK, EntityType.ZOMBIE);
+        put(EntityType.ZOMBIE_HORSE, EntityType.HORSE);
+        put(EntityType.SKELETON_HORSE, EntityType.HORSE);
+        put(EntityType.ZOGLIN, EntityType.HOGLIN);
+        put(EntityType.GLOW_SQUID, EntityType.SQUID);
+    }};
+
+    public static Set<EntityType<?>> getAdditionalTypes(EntityType<?> original) {
+        Set<EntityType<?>> set = new HashSet<>();
+        for (EntityType<?> key : typeMatchers.keySet()) {
+            if (typeMatchers.get(key) == original) set.add(key);
+        }
+        return set;
+    }
+
+    public static Config getConfig() {
+        return config;
+    }
+
+    public static Path getResolvedConfigPath() {
+        return RESOLVED_CONFIG_PATH;
+    }
 
     @Override
-    public void onInitializeClient() {}
+    public void onInitializeClient() {
+        RESOLVED_CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve(CONFIG_PATH);
+        LOGGER.info("Initializing old babies");
+        config = new Config(RESOLVED_CONFIG_PATH);
+    }
+    public static EntityType<?> getConfigType(EntityType<?> originalType) {
+        EntityType<?> configType = originalType;
+        if (typeMatchers.containsKey(configType)) {
+            configType = typeMatchers.get(configType);
+        }
+        return configType;
+    }
+
+    public static Identifier removeBabyFromIdentifier(Identifier identifier, EntityType<?> entityType) {
+        EntityType<?> typeToTest = getConfigType(entityType);
+        if (OldBabies.getConfig().isEntityEnabled(typeToTest)) {
+            return removeBabyFromIdentifier(identifier);
+        }
+        return identifier;
+    }
 
     public static Identifier removeBabyFromIdentifier(Identifier identifier) {
         String path = identifier.getPath();
         if (identifier.getNamespace().equals("minecraft") && !path.contains("rabbit")) {
+            path = fixVillagerTextures(path);
             path = path.replaceAll("_baby", "");
+            path = path.replaceAll("baby/", "");
             path = path.replaceAll("baby", "");
+            path = path.replaceAll("snifflet", "sniffer");
+            path = fixPandaTextures(path);
         }
         return Identifier.fromNamespaceAndPath(identifier.getNamespace(), path);
+    }
+
+    private static String fixVillagerTextures(String path) {
+        if (path.contains("villager")) {
+            path = path.replaceAll("baby/", "type/");
+        }
+        return path;
+    }
+
+    private static String fixPandaTextures(String path) {
+        if (path.contains("panda")) {
+            path = path.replaceAll("aggressive_panda", "panda_aggressive");
+            path = path.replaceAll("brown_panda", "panda_brown");
+            path = path.replaceAll("lazy_panda", "panda_lazy");
+            path = path.replaceAll("playful_panda", "panda_playful");
+            path = path.replaceAll("weak_panda", "panda_weak");
+            path = path.replaceAll("worried_panda", "panda_worried");
+        }
+        return path;
     }
 
     public static MeshDefinition createFullScaleEquineBabyMesh(final CubeDeformation g) {

@@ -16,6 +16,6 @@ public class LivingEntityRendererMixin<S extends LivingEntityRenderState> {
     @Redirect(method = "getRenderType", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/LivingEntityRenderer;getTextureLocation(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;)Lnet/minecraft/resources/Identifier;"))
     private Identifier redirectTextureLocation(LivingEntityRenderer<LivingEntity, S, EntityModel<? super S>> instance, S state) {
         Identifier identifier = instance.getTextureLocation(state);
-        return OldBabies.removeBabyFromIdentifier(identifier);
+        return OldBabies.removeBabyFromIdentifier(identifier, state.entityType);
     }
 }

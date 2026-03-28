@@ -21,6 +21,9 @@ public class Constants {
     public static final MeshTransformer ARMADILLO_BABY_TRANSFORMER = MeshTransformer.scaling(0.6F);
     public static final MeshTransformer CAMEL_BABY_TRANSFORMER = MeshTransformer.scaling(0.45F);
     public static final MeshTransformer POLAR_BEAR_BABY_TRANSFORMER = new BabyModelTransform(true, 16.0F, 4.0F, 2.25F, 2.0F, 24.0F, Set.of("head"));
+    public static final MeshTransformer HUMANOID_BABY_TRANSFORMER = new BabyModelTransform(true, 16.0F, 0.0F, 2.0F, 2.0F, 24.0F, Set.of("head"));
+    public static final MeshTransformer HOGLIN_BABY_TRANSFORMER = new BabyModelTransform(true, 8.0F, 6.0F, 1.9F, 2.0F, 24.0F, Set.of("head"));
+    public static final MeshTransformer PANDA_BABY_TRANSFORMER = new BabyModelTransform(true, 23.0F, 4.8F, 2.7F, 3.0F, 49.0F, Set.of("head"));
 
     public static ModelLayerLocation SHEEP_BABY_WOOL_UNDERCOAT;
     public static ModelLayerLocation COLD_CHICKEN_BABY;

@@ -32,7 +32,10 @@ public abstract class AgeableMobRendererMixin<T extends Mob, S extends LivingEnt
     private void overrideBabyModels(EntityRendererProvider.Context context, EntityModel<S> adultModel, EntityModel<S> babyModel, float shadow, CallbackInfo ci) {
         try {
             Optional<EntityModel<?>> replacementModel = ModelSwappers.tryReplaceEntityModel(context, (Class<? extends EntityModel<?>>) babyModel.getClass());
-            replacementModel.ifPresent(entityModel -> this.babyModel = (M) entityModel);
+            replacementModel.ifPresent(entityModel -> {
+                this.babyModel = (M) entityModel;
+                OldBabies.LOGGER.debug("Successfully swapped model {} for {}", babyModel.getClass().getName(), adultModel.getClass().getName());
+            });
         } catch (Exception exception) {
             OldBabies.LOGGER.error("Failed to swap the model {}: {}", babyModel.getClass().getName(), exception.getMessage());
         }

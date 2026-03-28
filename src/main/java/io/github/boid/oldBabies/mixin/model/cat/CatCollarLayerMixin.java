@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.CatRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.EntityType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,18 +31,20 @@ public class CatCollarLayerMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void afterInit(RenderLayerParent<CatRenderState, AbstractFelineModel<CatRenderState>> renderer, EntityModelSet modelSet, CallbackInfo ci) {
-        this.modifiedBabyModel =  new AdultCatModel(modelSet.bakeLayer(ModelLayers.CAT_BABY_COLLAR));
+        this.modifiedBabyModel = new AdultCatModel(modelSet.bakeLayer(ModelLayers.CAT_BABY_COLLAR));
     }
 
     @ModifyVariable(method = "submit(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/CatRenderState;FF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/layers/CatCollarLayer;coloredCutoutModelCopyLayerRender(Lnet/minecraft/client/model/Model;Lnet/minecraft/resources/Identifier;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;II)V"), order = 999, name = "model")
     private AbstractFelineModel<CatRenderState> modifyModel(AbstractFelineModel<CatRenderState> value) {
-        return this.modifiedBabyModel;
+        if (OldBabies.getConfig().isEntityEnabled(EntityType.CAT)) return this.modifiedBabyModel;
+        return value;
     }
 
     @SuppressWarnings("unchecked")
     @Redirect(method = "submit(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/CatRenderState;FF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/layers/CatCollarLayer;coloredCutoutModelCopyLayerRender(Lnet/minecraft/client/model/Model;Lnet/minecraft/resources/Identifier;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;II)V"))
     private void redirectLayerRender(Model<? super LivingEntityRenderState> model, Identifier identifier, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, LivingEntityRenderState livingEntityRenderState, int j, int k) {
-        RenderLayer.coloredCutoutModelCopyLayerRender(livingEntityRenderState.isBaby ? (Model<? super LivingEntityRenderState>) ((Object) modifiedBabyModel) : model, OldBabies.removeBabyFromIdentifier(identifier), poseStack, submitNodeCollector, i, livingEntityRenderState, j, k);
+        boolean enabled = OldBabies.getConfig().isEntityEnabled(EntityType.CAT) && livingEntityRenderState.isBaby;
+        RenderLayer.coloredCutoutModelCopyLayerRender(enabled ? (Model<? super LivingEntityRenderState>) ((Object) modifiedBabyModel) : model, OldBabies.removeBabyFromIdentifier(identifier, EntityType.CAT), poseStack, submitNodeCollector, i, livingEntityRenderState, j, k);
     }
 
 }
