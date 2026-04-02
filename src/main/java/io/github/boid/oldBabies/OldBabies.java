@@ -38,6 +38,15 @@ public class OldBabies implements ClientModInitializer {
         put(EntityType.GLOW_SQUID, EntityType.SQUID);
     }};
 
+    private static final Set<EntityType<?>> typesToRevert = new HashSet<>(){{
+        addAll(Config.getConfigurableEntities());
+        addAll(typeMatchers.keySet());
+    }};
+
+    public static boolean isRevertibleType(EntityType<?> type) {
+        return typesToRevert.contains(type);
+    }
+
     public static Set<EntityType<?>> getAdditionalTypes(EntityType<?> original) {
         Set<EntityType<?>> set = new HashSet<>();
         for (EntityType<?> key : typeMatchers.keySet()) {
@@ -78,7 +87,7 @@ public class OldBabies implements ClientModInitializer {
 
     public static Identifier removeBabyFromIdentifier(Identifier identifier) {
         String path = identifier.getPath();
-        if (identifier.getNamespace().equals("minecraft") && !path.contains("rabbit")) {
+        if (identifier.getNamespace().equals("minecraft")) {
             path = fixVillagerTextures(path);
             path = path.replaceAll("_baby", "");
             path = path.replaceAll("baby/", "");

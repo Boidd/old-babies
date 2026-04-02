@@ -16,8 +16,9 @@ import java.util.*;
 public class Config {
 
     private final Set<EntityType<?>> disabledEntityTypes = new HashSet<>();
-
     private final Path configPath;
+
+    private static final Set<EntityType<?>> configurableEntities = new HashSet<>();
 
     public void enableEntity(EntityType<?> entityType) {
         disabledEntityTypes.remove(entityType);
@@ -28,14 +29,15 @@ public class Config {
     }
 
     public static Set<EntityType<?>> getConfigurableEntities() {
-        Set<EntityType<?>> set = new HashSet<>();
-        set.addAll(ModelSwappers.getSwapperTypes());
-        set.addAll(LayerDefinitionOverrides.getLayerDefinitionTypes());
-        return set;
+        if (configurableEntities.isEmpty()) {
+            configurableEntities.addAll(ModelSwappers.getSwapperTypes());
+            configurableEntities.addAll(LayerDefinitionOverrides.getLayerDefinitionTypes());
+        }
+        return Set.copyOf(configurableEntities);
     }
 
     public boolean isEntityEnabled(EntityType<?> entityType) {
-        return !disabledEntityTypes.contains(entityType);
+        return OldBabies.isRevertibleType(entityType) && !disabledEntityTypes.contains(entityType);
     }
 
     public Config(Path path) {
