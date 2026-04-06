@@ -35,16 +35,16 @@ public class CatCollarLayerMixin {
     }
 
     @ModifyVariable(method = "submit(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/CatRenderState;FF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/layers/CatCollarLayer;coloredCutoutModelCopyLayerRender(Lnet/minecraft/client/model/Model;Lnet/minecraft/resources/Identifier;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;II)V"), order = 999, name = "model")
-    private AbstractFelineModel<CatRenderState> modifyModel(AbstractFelineModel<CatRenderState> value) {
+    private AbstractFelineModel<CatRenderState> modifyModel(AbstractFelineModel<CatRenderState> model) {
         if (OldBabies.getConfig().isEntityEnabled(EntityType.CAT)) return this.modifiedBabyModel;
-        return value;
+        return model;
     }
 
     @SuppressWarnings("unchecked")
     @Redirect(method = "submit(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/CatRenderState;FF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/layers/CatCollarLayer;coloredCutoutModelCopyLayerRender(Lnet/minecraft/client/model/Model;Lnet/minecraft/resources/Identifier;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;II)V"))
     private void redirectLayerRender(Model<? super LivingEntityRenderState> model, Identifier identifier, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, LivingEntityRenderState livingEntityRenderState, int j, int k) {
         boolean enabled = OldBabies.getConfig().isEntityEnabled(EntityType.CAT) && livingEntityRenderState.isBaby;
-        RenderLayer.coloredCutoutModelCopyLayerRender(enabled ? (Model<? super LivingEntityRenderState>) ((Object) modifiedBabyModel) : model, OldBabies.removeBabyFromIdentifier(identifier, EntityType.CAT), poseStack, submitNodeCollector, i, livingEntityRenderState, j, k);
+        RenderLayer.coloredCutoutModelCopyLayerRender(enabled ? (Model<? super LivingEntityRenderState>) ((Object) modifiedBabyModel) : model, OldBabies.removeBabyFromIdentifier(identifier, livingEntityRenderState.entityType), poseStack, submitNodeCollector, i, livingEntityRenderState, j, k);
     }
 
 }

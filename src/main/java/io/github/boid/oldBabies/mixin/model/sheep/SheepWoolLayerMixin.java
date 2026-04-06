@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public class SheepWoolLayerMixin {
 
     @ModifyVariable(method = "submit(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/SheepRenderState;FF)V", at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/entity/state/SheepRenderState;isInvisible:Z", opcode = Opcodes.GETFIELD), name = "location")
-    private Identifier fixTextureLocation(Identifier value) {
-        return OldBabies.removeBabyFromIdentifier(value, EntityType.SHEEP);
+    private Identifier fixTextureLocation(Identifier location) {
+        return OldBabies.removeBabyFromIdentifier(location, EntityType.SHEEP);
     }
 
 }

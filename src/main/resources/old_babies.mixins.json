@@ -10,6 +10,7 @@
     "ModelLayersMixin",
     "model.ChickenRendererMixin",
     "model.DrownedOuterLayerMixin",
+    "model.FoxModelMixin",
     "model.GoatRendererMixin",
     "model.PigRendererMixin",
     "model.StriderRendererMixin",

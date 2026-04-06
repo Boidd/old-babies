@@ -8,6 +8,7 @@ import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.navigation.ScreenRectangle;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.InputWithModifiers;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.CommonComponents;
@@ -96,7 +97,7 @@ public class ConfigScreen extends Screen {
         public CheckboxList(Minecraft minecraft, ConfigScreen screen, int height, int y, List<Checkbox> checkboxes) {
             super(minecraft, screen.width, height, y, 24);
             for (Checkbox checkbox : checkboxes) {
-                CheckboxEntry entry = new CheckboxEntry(checkbox);
+                CheckboxEntry entry = new CheckboxEntry(this, checkbox);
                 this.addEntry(entry);
             }
         }
@@ -116,9 +117,11 @@ public class ConfigScreen extends Screen {
 
     private static class CheckboxEntry extends ObjectSelectionList.Entry<CheckboxEntry> {
 
+        private final CheckboxList parent;
         private final Checkbox checkbox;
 
-        public CheckboxEntry(Checkbox checkbox) {
+        public CheckboxEntry(CheckboxList parent, Checkbox checkbox) {
+            this.parent = parent;
             this.checkbox = checkbox;
             updatePosition();
         }
@@ -146,7 +149,7 @@ public class ConfigScreen extends Screen {
         @Override
         public boolean mouseClicked(final @NonNull MouseButtonEvent event, boolean doubleClick) {
             updatePosition();
-            return this.checkbox.mouseClicked(event, doubleClick);
+            return onPress(event, this.checkbox.mouseClicked(event, doubleClick));
         }
 
         @Override
@@ -158,13 +161,23 @@ public class ConfigScreen extends Screen {
         @Override
         public boolean keyPressed(final @NonNull KeyEvent event) {
             updatePosition();
-            return this.checkbox.keyPressed(event);
+            return onPress(event, this.checkbox.keyPressed(event));
         }
 
         @Override
         public boolean isMouseOver(final double mx, final double my) {
             this.updatePosition();
             return super.isMouseOver(mx, my);
+        }
+
+        private boolean onPress(InputWithModifiers input, boolean result) {
+            if (result && input.hasShiftDown()) {
+                boolean value = this.checkbox.selected();
+                for (CheckboxEntry entry : this.parent.children()) {
+                    if (entry.checkbox.selected() != value) entry.checkbox.onPress(input);
+                }
+            }
+            return result;
         }
         
     }
