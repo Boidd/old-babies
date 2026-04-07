@@ -4,6 +4,8 @@ This mod restores the original models of all baby mobs revamped in the 26.1 upda
 
 There is a configuration screen accessible using [Mod Menu](https://modrinth.com/mod/modmenu) that allows enabling/disabling the classic models of individual mobs
 
+Shift clicking on the config screen will toggle the classic models of every mob
+
 The models of baby rabbits are unchanged as their default model was updated
 
 The mod is compatible with resource packs that change mob textures
