@@ -23,7 +23,8 @@
     ]
   },
   "mixins": [
-    "old_babies.mixins.json"
+    "old_babies.mixins.json",
+    "old_babies.compatibility.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",

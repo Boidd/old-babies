@@ -17,6 +17,7 @@ repositories {
         name = "Terraformers"
         url = "https://maven.terraformersmc.com/"
     }
+    maven { url 'https://api.modrinth.com/maven' }
 }
 
 loom {
@@ -27,7 +28,8 @@ dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     api "net.fabricmc:fabric-loader:${project.loader_version}"
-    implementation("com.terraformersmc:modmenu:${project.modmenu_version}")
+    implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    compileOnly "maven.modrinth:entity-model-features:3.2.4-fabric-26.1"
 }
 
 processResources {

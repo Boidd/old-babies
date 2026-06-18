@@ -26,6 +26,7 @@ public class OldBabies implements ClientModInitializer {
     protected static final String CONFIG_PATH = MOD_ID+".json";
     private static Path RESOLVED_CONFIG_PATH;
     private static Config config;
+    private static boolean emfInstalled = false;
 
     private static final Map<EntityType<?>, EntityType<?>> typeMatchers = new HashMap<>(){{
         put(EntityType.TRADER_LLAMA, EntityType.LLAMA);
@@ -42,6 +43,14 @@ public class OldBabies implements ClientModInitializer {
         addAll(Config.getConfigurableEntities());
         addAll(typeMatchers.keySet());
     }};
+
+    public static void initEMF() {
+        emfInstalled = true;
+    }
+
+    public static boolean detectEMF() {
+        return emfInstalled;
+    }
 
     public static boolean isRevertibleType(EntityType<?> type) {
         return typesToRevert.contains(type);
@@ -89,10 +98,10 @@ public class OldBabies implements ClientModInitializer {
         String path = identifier.getPath();
         if (identifier.getNamespace().equals("minecraft")) {
             path = fixVillagerTextures(path);
-            path = path.replaceAll("_baby", "");
-            path = path.replaceAll("baby/", "");
-            path = path.replaceAll("baby", "");
-            path = path.replaceAll("snifflet", "sniffer");
+            path = path.replace("_baby", "");
+            path = path.replace("baby/", "");
+            path = path.replace("baby", "");
+            path = path.replace("snifflet", "sniffer");
             path = fixPandaTextures(path);
         }
         return Identifier.fromNamespaceAndPath(identifier.getNamespace(), path);
@@ -100,19 +109,19 @@ public class OldBabies implements ClientModInitializer {
 
     private static String fixVillagerTextures(String path) {
         if (path.contains("villager")) {
-            path = path.replaceAll("baby/", "type/");
+            path = path.replace("baby/", "type/");
         }
         return path;
     }
 
     private static String fixPandaTextures(String path) {
         if (path.contains("panda")) {
-            path = path.replaceAll("aggressive_panda", "panda_aggressive");
-            path = path.replaceAll("brown_panda", "panda_brown");
-            path = path.replaceAll("lazy_panda", "panda_lazy");
-            path = path.replaceAll("playful_panda", "panda_playful");
-            path = path.replaceAll("weak_panda", "panda_weak");
-            path = path.replaceAll("worried_panda", "panda_worried");
+            path = path.replace("aggressive_panda", "panda_aggressive");
+            path = path.replace("brown_panda", "panda_brown");
+            path = path.replace("lazy_panda", "panda_lazy");
+            path = path.replace("playful_panda", "panda_playful");
+            path = path.replace("weak_panda", "panda_weak");
+            path = path.replace("worried_panda", "panda_worried");
         }
         return path;
     }

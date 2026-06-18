@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_25",
   "client": [
     "AgeableMobRendererMixin",
+    "AnimationUtilsMixin",
     "LayerDefinitionsMixin",
     "LivingEntityRendererMixin",
     "ModelLayersMixin",
@@ -24,15 +25,14 @@
     "model.llama.LlamaDecorLayerMixin",
     "model.sheep.SheepWoolLayerMixin",
     "model.sheep.SheepWoolUndercoatLayerMixin",
-    "model.wolf.WolfCollarLayerMixin"
+    "model.wolf.AdultWolfModelMixin",
+    "model.wolf.WolfCollarLayerMixin",
+    "entity.AxolotlMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "overwrites": {
     "requireAnnotations": true
-  },
-  "mixins": [
-    "entity.AxolotlMixin"
-  ]
+  }
 }
