@@ -7,6 +7,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,14 +30,14 @@ public class OldBabies implements ClientModInitializer {
     private static boolean emfInstalled = false;
 
     private static final Map<EntityType<?>, EntityType<?>> typeMatchers = new HashMap<>(){{
-        put(EntityType.TRADER_LLAMA, EntityType.LLAMA);
-        put(EntityType.MULE, EntityType.DONKEY);
-        put(EntityType.ZOMBIE_VILLAGER, EntityType.VILLAGER);
-        put(EntityType.HUSK, EntityType.ZOMBIE);
-        put(EntityType.ZOMBIE_HORSE, EntityType.HORSE);
-        put(EntityType.SKELETON_HORSE, EntityType.HORSE);
-        put(EntityType.ZOGLIN, EntityType.HOGLIN);
-        put(EntityType.GLOW_SQUID, EntityType.SQUID);
+        put(EntityTypes.TRADER_LLAMA, EntityTypes.LLAMA);
+        put(EntityTypes.MULE, EntityTypes.DONKEY);
+        put(EntityTypes.ZOMBIE_VILLAGER, EntityTypes.VILLAGER);
+        put(EntityTypes.HUSK, EntityTypes.ZOMBIE);
+        put(EntityTypes.ZOMBIE_HORSE, EntityTypes.HORSE);
+        put(EntityTypes.SKELETON_HORSE, EntityTypes.HORSE);
+        put(EntityTypes.ZOGLIN, EntityTypes.HOGLIN);
+        put(EntityTypes.GLOW_SQUID, EntityTypes.SQUID);
     }};
 
     private static final Set<EntityType<?>> typesToRevert = new HashSet<>(){{

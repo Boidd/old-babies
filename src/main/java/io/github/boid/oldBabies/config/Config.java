@@ -4,6 +4,8 @@ import com.google.gson.*;
 import io.github.boid.oldBabies.LayerDefinitionOverrides;
 import io.github.boid.oldBabies.ModelSwappers;
 import io.github.boid.oldBabies.OldBabies;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 
 import java.io.File;
@@ -65,7 +67,7 @@ public class Config {
                 JsonArray disabledEntitiesArray = json.get("disabled_entities").getAsJsonArray();
                 for (JsonElement element : disabledEntitiesArray.asList()) {
                     String entity = element.getAsString();
-                    Optional<EntityType<?>> type = EntityType.byString(entity);
+                    Optional<EntityType<?>> type = BuiltInRegistries.ENTITY_TYPE.getOptional(Identifier.tryParse(entity));
                     type.ifPresent(disabledEntityTypes::add);
                 }
             } else {

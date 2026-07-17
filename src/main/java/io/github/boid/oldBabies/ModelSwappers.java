@@ -43,6 +43,7 @@ import net.minecraft.client.model.npc.BabyVillagerModel;
 import net.minecraft.client.model.npc.VillagerModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -79,29 +80,29 @@ public class ModelSwappers {
     }
 
     private static final List<Swapper> MODEL_SWAPPERS = new ArrayList<>(){{
-        add(new Swapper(BabyAxolotlModel.class, AdultAxolotlModel.class, ModelLayers.AXOLOTL_BABY, EntityType.AXOLOTL));
-        add(new Swapper(BabyBeeModel.class, AdultBeeModel.class, ModelLayers.BEE_BABY, EntityType.BEE));
-        add(new Swapper(BabyFoxModel.class, AdultFoxModel.class, ModelLayers.FOX_BABY, EntityType.FOX));
-        add(new Swapper(BabyGoatModel.class, GoatModel.class, ModelLayers.GOAT_BABY, EntityType.GOAT));
-        add(new Swapper(BabyCatModel.class, AdultCatModel.class, ModelLayers.CAT_BABY, EntityType.CAT));
-        add(new Swapper(BabyOcelotModel.class, AdultOcelotModel.class, ModelLayers.OCELOT_BABY, EntityType.OCELOT));
-        add(new Swapper(BabyWolfModel.class, AdultWolfModel.class, ModelLayers.WOLF_BABY, EntityType.WOLF));
-        add(new Swapper(BabyArmadilloModel.class, AdultArmadilloModel.class, ModelLayers.ARMADILLO_BABY, EntityType.ARMADILLO));
-        add(new Swapper(BabyCamelModel.class, AdultCamelModel.class, ModelLayers.CAMEL_BABY, EntityType.CAMEL));
-        add(new Swapper(BabyPolarBearModel.class, PolarBearModel.class, ModelLayers.POLAR_BEAR_BABY, EntityType.POLAR_BEAR));
-        add(new Swapper(BabyLlamaModel.class, LlamaModel.class, ModelLayers.LLAMA_BABY, EntityType.LLAMA));
-        add(new Swapper(BabyHorseModel.class, HorseModel.class, ModelLayers.HORSE_BABY, EntityType.HORSE));
-        add(new Swapper(BabyPiglinModel.class, AdultPiglinModel.class, ModelLayers.PIGLIN_BABY, EntityType.PIGLIN));
-        add(new Swapper(BabyZombifiedPiglinModel.class, AdultZombifiedPiglinModel.class, ModelLayers.ZOMBIFIED_PIGLIN_BABY, EntityType.ZOMBIFIED_PIGLIN));
-        add(new Swapper(BabyVillagerModel.class, VillagerModel.class, ModelLayers.VILLAGER_BABY, EntityType.VILLAGER));
-        add(new Swapper(BabyZombieModel.class, ZombieModel.class, ModelLayers.ZOMBIE_BABY, EntityType.ZOMBIE));
-        add(new Swapper(BabyZombieVillagerModel.class, ZombieVillagerModel.class, ModelLayers.ZOMBIE_VILLAGER_BABY, EntityType.VILLAGER));
-        add(new Swapper(BabyDrownedModel.class, DrownedModel.class, ModelLayers.DROWNED_BABY, EntityType.DROWNED));
-        add(new Swapper(BabyDonkeyModel.class, DonkeyModel.class, ModelLayers.DONKEY_BABY, EntityType.DONKEY));
-        add(new Swapper(BabyHoglinModel.class, HoglinModel.class, ModelLayers.HOGLIN_BABY, EntityType.HOGLIN));
-        add(new Swapper(BabyPandaModel.class, PandaModel.class, ModelLayers.PANDA_BABY, EntityType.PANDA));
-        add(new Swapper(SniffletModel.class, SnifferModel.class, ModelLayers.SNIFFER_BABY, EntityType.SNIFFER));
-        add(new Swapper(BabyStriderModel.class, AdultStriderModel.class, ModelLayers.STRIDER_BABY, EntityType.STRIDER));
+        add(new Swapper(BabyAxolotlModel.class, AdultAxolotlModel.class, ModelLayers.AXOLOTL_BABY, EntityTypes.AXOLOTL));
+        add(new Swapper(BabyBeeModel.class, AdultBeeModel.class, ModelLayers.BEE_BABY, EntityTypes.BEE));
+        add(new Swapper(BabyFoxModel.class, AdultFoxModel.class, ModelLayers.FOX_BABY, EntityTypes.FOX));
+        add(new Swapper(BabyGoatModel.class, GoatModel.class, ModelLayers.GOAT_BABY, EntityTypes.GOAT));
+        add(new Swapper(BabyCatModel.class, AdultCatModel.class, ModelLayers.CAT_BABY, EntityTypes.CAT));
+        add(new Swapper(BabyOcelotModel.class, AdultOcelotModel.class, ModelLayers.OCELOT_BABY, EntityTypes.OCELOT));
+        add(new Swapper(BabyWolfModel.class, AdultWolfModel.class, ModelLayers.WOLF_BABY, EntityTypes.WOLF));
+        add(new Swapper(BabyArmadilloModel.class, AdultArmadilloModel.class, ModelLayers.ARMADILLO_BABY, EntityTypes.ARMADILLO));
+        add(new Swapper(BabyCamelModel.class, AdultCamelModel.class, ModelLayers.CAMEL_BABY, EntityTypes.CAMEL));
+        add(new Swapper(BabyPolarBearModel.class, PolarBearModel.class, ModelLayers.POLAR_BEAR_BABY, EntityTypes.POLAR_BEAR));
+        add(new Swapper(BabyLlamaModel.class, LlamaModel.class, ModelLayers.LLAMA_BABY, EntityTypes.LLAMA));
+        add(new Swapper(BabyHorseModel.class, HorseModel.class, ModelLayers.HORSE_BABY, EntityTypes.HORSE));
+        add(new Swapper(BabyPiglinModel.class, AdultPiglinModel.class, ModelLayers.PIGLIN_BABY, EntityTypes.PIGLIN));
+        add(new Swapper(BabyZombifiedPiglinModel.class, AdultZombifiedPiglinModel.class, ModelLayers.ZOMBIFIED_PIGLIN_BABY, EntityTypes.ZOMBIFIED_PIGLIN));
+        add(new Swapper(BabyVillagerModel.class, VillagerModel.class, ModelLayers.VILLAGER_BABY, EntityTypes.VILLAGER));
+        add(new Swapper(BabyZombieModel.class, ZombieModel.class, ModelLayers.ZOMBIE_BABY, EntityTypes.ZOMBIE));
+        add(new Swapper(BabyZombieVillagerModel.class, ZombieVillagerModel.class, ModelLayers.ZOMBIE_VILLAGER_BABY, EntityTypes.VILLAGER));
+        add(new Swapper(BabyDrownedModel.class, DrownedModel.class, ModelLayers.DROWNED_BABY, EntityTypes.DROWNED));
+        add(new Swapper(BabyDonkeyModel.class, DonkeyModel.class, ModelLayers.DONKEY_BABY, EntityTypes.DONKEY));
+        add(new Swapper(BabyHoglinModel.class, HoglinModel.class, ModelLayers.HOGLIN_BABY, EntityTypes.HOGLIN));
+        add(new Swapper(BabyPandaModel.class, PandaModel.class, ModelLayers.PANDA_BABY, EntityTypes.PANDA));
+        add(new Swapper(SniffletModel.class, SnifferModel.class, ModelLayers.SNIFFER_BABY, EntityTypes.SNIFFER));
+        add(new Swapper(BabyStriderModel.class, AdultStriderModel.class, ModelLayers.STRIDER_BABY, EntityTypes.STRIDER));
     }};
 
     public static List<EntityType<?>> getSwapperTypes() {

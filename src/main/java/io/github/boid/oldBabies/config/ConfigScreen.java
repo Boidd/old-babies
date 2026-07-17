@@ -23,7 +23,6 @@ public class ConfigScreen extends Screen {
 
     private final Screen parentScreen;
     private final Config config;
-
     private HeaderAndFooterLayout layout;
 
     protected ConfigScreen(Screen parent) {
@@ -76,7 +75,7 @@ public class ConfigScreen extends Screen {
         return Tooltip.create(component);
     }
 
-    private ObjectSelectionList<CheckboxEntry> createCheckboxes() {
+    private CheckboxList createCheckboxes() {
         Set<EntityType<?>> unsortedEntities = Config.getConfigurableEntities();
         List<EntityType<?>> entities = new ArrayList<>(unsortedEntities);
         entities.sort(Comparator.comparing(o -> o.getDescription().getString()));
@@ -84,9 +83,9 @@ public class ConfigScreen extends Screen {
         for (EntityType<?> type : entities) {
             Checkbox checkbox = Checkbox.builder(type.getDescription(), this.getFont())
                     .selected(config.isEntityEnabled(type))
-                    .tooltip(createTooltip(type))
                     .onValueChange(new UpdateCheckbox(type))
                     .build();
+            checkbox.setTooltip(createTooltip(type));
             checkboxes.add(checkbox);
         }
         return new CheckboxList(this.minecraft, this, this.layout.getContentHeight(), this.layout.getHeaderHeight(), checkboxes);
@@ -199,6 +198,6 @@ public class ConfigScreen extends Screen {
 
     @Override
     public void onClose() {
-        this.minecraft.setScreen(this.parentScreen);
+        this.minecraft.gui.setScreen(this.parentScreen);
     }
 }

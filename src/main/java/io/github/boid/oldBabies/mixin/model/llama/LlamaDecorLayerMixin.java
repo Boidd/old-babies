@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.entity.state.LlamaRenderState;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import org.spongepowered.asm.mixin.*;
@@ -41,8 +41,8 @@ public class LlamaDecorLayerMixin {
     @Redirect(method = "renderEquipment", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/layers/EquipmentLayerRenderer;renderLayers(Lnet/minecraft/client/resources/model/EquipmentClientInfo$LayerType;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/client/model/Model;Ljava/lang/Object;Lnet/minecraft/world/item/ItemStack;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;II)V"))
     private <S> void redirectRenderLayers(EquipmentLayerRenderer instance, EquipmentClientInfo.LayerType layerType, ResourceKey<EquipmentAsset> equipmentAssetId, Model<? super S> model, S state, ItemStack itemStack, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, int outlineColor) {
         LlamaRenderState llamaState = (LlamaRenderState) state;
-        boolean useOldModel = OldBabies.getConfig().isEntityEnabled(EntityType.LLAMA) && llamaState.isBaby;
-        Identifier id = OldBabies.removeBabyFromIdentifier(equipmentAssetId.identifier(), EntityType.LLAMA);
+        boolean useOldModel = OldBabies.getConfig().isEntityEnabled(EntityTypes.LLAMA) && llamaState.isBaby;
+        Identifier id = OldBabies.removeBabyFromIdentifier(equipmentAssetId.identifier(), EntityTypes.LLAMA);
         ResourceKey<EquipmentAsset> equipmentAssetKey = ResourceKey.create(equipmentAssetId.registryKey(), id);
         this.equipmentRenderer.renderLayers(layerType, equipmentAssetKey, (Model<? super S>)(useOldModel ? this.oldBabyModel : model), state, itemStack, poseStack, submitNodeCollector, lightCoords, llamaState.outlineColor);
     }

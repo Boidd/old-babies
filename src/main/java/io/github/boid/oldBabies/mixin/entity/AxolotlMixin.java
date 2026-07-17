@@ -1,7 +1,7 @@
 package io.github.boid.oldBabies.mixin.entity;
 
 import io.github.boid.oldBabies.OldBabies;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,7 +19,7 @@ public abstract class AxolotlMixin {
 
     @Redirect(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/axolotl/Axolotl;tickBabyAnimations()V"))
     private void redirectTickBabyAnimations(Axolotl instance) {
-        if (OldBabies.getConfig().isEntityEnabled(EntityType.AXOLOTL)) {
+        if (OldBabies.getConfig().isEntityEnabled(EntityTypes.AXOLOTL)) {
             this.tickAdultAnimations();
         } else {
             this.tickBabyAnimations();

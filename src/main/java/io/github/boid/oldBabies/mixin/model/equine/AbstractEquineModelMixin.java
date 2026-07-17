@@ -6,7 +6,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.entity.state.EquineRenderState;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -33,7 +33,7 @@ public class AbstractEquineModelMixin<T extends EquineRenderState> {
 
     @Inject(method = "setupAnim(Lnet/minecraft/client/renderer/entity/state/EquineRenderState;)V", at = @At(value = "TAIL"))
     private void fixTailAnimation(T state, CallbackInfo ci) {
-        if (OldBabies.getConfig().isEntityEnabled(EntityType.HORSE)) {
+        if (OldBabies.getConfig().isEntityEnabled(EntityTypes.HORSE)) {
             this.tail.xRot = ((float)Math.PI / 6F) + state.walkAnimationSpeed * 0.75F;
         }
     }
