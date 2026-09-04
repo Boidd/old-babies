@@ -28,7 +28,7 @@
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "minecraft": "26.3-pre.1"
+    "minecraft": "26.3-pre.2"
   },
   "suggests": {
     "modmenu" : ">=${modmenu_version}"
